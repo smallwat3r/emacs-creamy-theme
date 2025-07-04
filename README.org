@@ -1,0 +1,47 @@
+#+TITLE: creamy-theme for Emacs
+
+** About
+
+Creamy is a warm, minimal theme for Emacs designed to reduce visual noise and make long coding sessions easier on the eyes. It softens the harsh edges of typical syntax highlighting by stripping away excess color, leaving only the essential elements subtly emphasized. The result is a calm, focused editing experience, gentle on the eyes, yet readable and expressive where it counts.
+
+I've used Creamy privately for years, refining it over time to suit my needs for clarity and comfort. Eventually, it felt right to share it with the community, and now it’s available as a standalone theme.
+
+Prefer darker environments? There's also Creamy Dark, offering the same clean aesthetic with a deeper, soothing palette, with a full black background.
+
+** Previews
+
+#+NAME: fig:creamy
+#+CAPTION: Creamy
+[[./images/creamy.png]]
+
+#+NAME: fig:creamy-dark
+#+CAPTION: Creamy Dark
+[[./images/creamy-dark.png]]
+
+
+** Installation
+
+*** From the Git repository
+
+Clone the repository:
+#+begin_src shell
+git clone https://github.com/smallwat3r/emacs-creamy-theme.git
+#+end_src
+
+And add the following to your ~.emacs~ file:
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "/path/to/creamy-theme")
+(load-theme 'creamy t)
+#+end_src
+
+*** Doom Emacs
+
+Add the following to your ~packages.el~ file:
+#+begin_src emacs-lisp
+(package! creamy-theme)
+#+end_src
+
+Then load the theme in your ~config.el~ file:
+#+begin_src emacs-lisp
+(setq doom-theme 'creamy)
+#+end_src
