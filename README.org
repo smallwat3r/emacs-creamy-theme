@@ -10,9 +10,13 @@ Prefer darker environments? There's also Creamy Dark, offering the same clean ae
 
 ** Previews
 
+Creamy
+
 #+NAME: fig:creamy
 #+CAPTION: Creamy
 [[./images/creamy.png]]
+
+Creamy Dark
 
 #+NAME: fig:creamy-dark
 #+CAPTION: Creamy Dark
