@@ -42,7 +42,7 @@ And add the following to your ~.emacs~ file:
 
 Add the following to your ~packages.el~ file:
 #+begin_src emacs-lisp
-(package! creamy-theme)
+(package! creamy-theme :recipe (:host github :repo "smallwat3r/emacs-creamy-theme"))
 #+end_src
 
 Then load the theme in your ~config.el~ file:
