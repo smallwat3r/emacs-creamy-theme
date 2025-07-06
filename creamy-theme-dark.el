@@ -1,4 +1,4 @@
-;;; creamy-dark-theme.el --- A simple dark theme from creamy colors  -*- lexical-binding: t -*-
+;;; creamy-theme-dark.el --- A simple dark theme from creamy colors  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Matthieu Petiteau <mpetiteau.pro@gmail.com>
 
@@ -28,7 +28,7 @@
 
 (deftheme creamy-dark "A simple dark theme from creamy colors.")
 
-(defgroup creamy-dark-theme nil
+(defgroup creamy-theme-dark nil
   "Creamy dark theme."
   :group 'faces
   :prefix "creamy-dark-"
@@ -169,4 +169,4 @@
 
 (provide-theme 'creamy-dark)
 
-;;; creamy-dark-theme.el ends here
+;;; creamy-theme-dark.el ends here
