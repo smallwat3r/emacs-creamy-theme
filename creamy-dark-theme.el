@@ -1,4 +1,4 @@
-;;; creamy-theme-dark.el --- A simple dark theme from creamy colors  -*- lexical-binding: t -*-
+;;; creamy-dark-theme.el --- A simple dark theme from creamy colors  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Matthieu Petiteau <mpetiteau.pro@gmail.com>
 
@@ -169,4 +169,4 @@
 
 (provide-theme 'creamy-dark)
 
-;;; creamy-theme-dark.el ends here
+;;; creamy-dark-theme.el ends here
