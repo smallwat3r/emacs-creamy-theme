@@ -28,7 +28,7 @@
 
 (deftheme creamy-dark "A simple dark theme from creamy colors.")
 
-(defgroup creamy-dark-theme nil
+(defgroup creamy-theme-dark nil
   "Creamy dark theme."
   :group 'faces
   :prefix "creamy-dark-"
