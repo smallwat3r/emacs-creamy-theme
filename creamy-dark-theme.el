@@ -1,4 +1,4 @@
-;;; creamy-theme.el --- A simple creamy light theme  -*- lexical-binding: t -*-
+;;; creamy-dark-theme.el --- A simple dark theme from creamy  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Matthieu Petiteau <mpetiteau.pro@gmail.com>
 
@@ -22,38 +22,38 @@
 
 ;;; Commentary:
 
-;; A simple creamy light theme.
+;; A simple dark theme from creamy.
 
 ;;; Code:
 
-(deftheme creamy "A simple creamy light theme.")
+(deftheme creamy-dark "A simple dark theme from creamy colors.")
 
-(defgroup creamy-theme nil
-  "Creamy theme."
+(defgroup creamy-dark-theme nil
+  "Creamy dark theme."
   :group 'faces
-  :prefix "creamy-"
-  :tag "Creamy theme")
+  :prefix "creamy-dark-"
+  :tag "Creamy dark theme")
 
 (custom-theme-set-faces
- 'creamy
+ 'creamy-dark
 
- `(default ((t (:background "#F5E4C1" :foreground "black"))))
+ `(default ((t (:background "black" :foreground "white"))))
 
  `(lsp-headerline-breadcrumb-symbols-face ((t (:inherit font-lock-constant-face))))
  `(lsp-headerline-breadcrumb-path-face ((t (:inherit font-lock-constant-face))))
 
- `(eglot-highlight-symbol-face ((t (:background "LightSteelBlue1"))))
+ `(eglot-highlight-symbol-face ((t (:background "DeepSkyBlue4"))))
 
  `(success ((t (:foreground "green4" :weight bold))))
  `(warning ((t (:foreground "OrangeRed3" :weight bold))))
  `(error ((t (:foreground "firebrick2" :weight bold))))
 
  `(highlight-numbers-number ((t (:foreground "dark cyan"))))
- `(font-lock-doc-face ((t (:foreground "DarkRed" :slant italic))))
- `(font-lock-comment-face ((t (:foreground "yellow4" :slant italic))))
- `(font-lock-comment-delimiter-face ((t (:foreground "yellow4"))))
- `(font-lock-keyword-face ((t (:foreground "Purple"))))
- `(font-lock-string-face ((t (:foreground "turquoise4"))))
+ `(font-lock-doc-face ((t (:foreground "PaleGoldenrod" :slant italic))))
+ `(font-lock-comment-face ((t (:foreground "yellow3" :slant italic))))
+ `(font-lock-comment-delimiter-face ((t (:foreground "yellow3"))))
+ `(font-lock-keyword-face ((t (:foreground "orchid"))))
+ `(font-lock-string-face ((t (:foreground "PaleGoldenrod"))))
 
  `(makefile-targets ((t (:inherit font-lock-keyword-face))))
  `(nxml-element-local-name ((t (:inherit font-lock-keyword-face))))
@@ -69,31 +69,29 @@
 
  `(link ((t (:foreground "cyan4" :underline t))))
 
- `(region ((t (:background "wheat2" :extend t))))
- `(magit-section-highlight ((t (:background "wheat2"))))
+ `(region ((t (:background "grey10" :extend t))))
 
- `(highlight ((t (:background "burlywood1"))))
- `(lazy-highlight ((t (:background "gold2"))))
+ `(highlight ((t (:background "SteelBlue4"))))
+ `(lazy-highlight ((t (:background "dark goldenrod" :foreground "black" :weight bold))))
 
- `(whitespace-tab ((t (:background "PaleTurquoise1"))))
+ `(whitespace-tab ((t (:background "PaleTurquoise4"))))
 
  `(show-paren-match ((t (:background "#c488ff" :foreground "black" :underline t :weight bold))))
  `(show-paren-mismatch ((t (:background "red4" :foreground "red" :weight bold))))
 
  `(fringe ((t (:background unspecified))))
- `(line-number ((t :foreground "cornsilk3")))
+ `(line-number ((t :foreground "grey12")))
 
  `(git-commit-summary ((t (:weight bold))))
- `(magit-section-highlight ((t (:background "#f6fecd"))))
  `(magit-diff-context-highlight ((t (:background unspecified))))
 
- `(term-color-white ((t (:foreground "grey41" :background "grey41"))))
+ `(term-color-white ((t (:foreground "grey90" :background "grey90"))))
  `(term-color-black ((t (:foreground "grey59" :background "grey59"))))
- `(term-color-yellow ((t (:foreground "yellow4" :background "yellow4"))))
- `(term-color-blue ((t (:foreground "DarkBlue" :background "DarkBlue"))))
- `(term-color-red ((t (:foreground "DarkRed" :background "DarkRed"))))
- `(term-color-cyan ((t (:foreground "DarkCyan" :background "DarkCyan"))))
- `(term-color-green ((t (:foreground "chartreuse4" :background "chartreuse4"))))
+ `(term-color-yellow ((t (:foreground "yellow3" :background "yellow3"))))
+ `(term-color-blue ((t (:foreground "SteelBlue2" :background "SteelBlue2"))))
+ `(term-color-red ((t (:foreground "VioletRed3" :background "VioletRed3"))))
+ `(term-color-cyan ((t (:foreground "cyan4" :background "cyan4"))))
+ `(term-color-green ((t (:foreground "green3" :background "green3"))))
  `(term-color-magenta ((t (:foreground "magenta" :background "magenta"))))
 
  `(term-color-bright-white ((t (:inherit term-color-white))))
@@ -107,10 +105,10 @@
 
  `(diredfl-dir-name ((t (:background unspecified :underline t))))
 
- `(org-block-begin-line ((t (:inherit font-lock-comment-face :background "cornsilk3" :extend t))))
- `(org-block-end-line ((t (:inherit font-lock-comment-face :background "cornsilk3" :extend t))))
- `(org-code ((t (:inherit fixed-pitch :background "cornsilk"))))
- `(org-block ((t (:inherit fixed-pitch :background "cornsilk" :extend t))))
+ `(org-block-begin-line ((t (:inherit font-lock-comment-face :background "gray20" :extend t))))
+ `(org-block-end-line ((t (:inherit font-lock-comment-face :background "gray20" :extend t))))
+ `(org-code ((t (:inherit fixed-pitch :background "gray10"))))
+ `(org-block ((t (:inherit fixed-pitch :background "gray10" :extend t))))
  `(org-indent ((t (:inherit (org-hide fixed-pitch)))))
  `(org-table ((t (:inherit fixed-pitch :foreground "gray41"))))
  `(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
@@ -119,14 +117,14 @@
  `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
  `(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
 
- `(outline-1 ((t (:foreground "#531d86"))))
- `(outline-2 ((t (:foreground "#121e73"))))
- `(outline-3 ((t (:foreground "#bb0ecf"))))
- `(outline-4 ((t (:foreground "#7752d4"))))
- `(outline-5 ((t (:foreground "#2a0f49"))))
- `(outline-6 ((t (:foreground "#e5641c"))))
- `(outline-7 ((t (:foreground "#630800"))))
- `(outline-8 ((t (:foreground "#421919"))))
+ `(outline-1 ((t (:foreground "purple"))))
+ `(outline-2 ((t (:foreground "VioletRed3"))))
+ `(outline-3 ((t (:foreground "turquoise3"))))
+ `(outline-4 ((t (:foreground "coral"))))
+ `(outline-5 ((t (:foreground "firebrick"))))
+ `(outline-6 ((t (:foreground "yellow green"))))
+ `(outline-7 ((t (:foreground "pale green"))))
+ `(outline-8 ((t (:foreground "medium slate blue"))))
 
  `(markdown-header-face-1 ((t (:inherit outline-1))))
  `(markdown-header-face-2 ((t (:inherit outline-2))))
@@ -164,12 +162,12 @@
  `(corfu-default ((t (:inherit default))))
  `(corfu-current ((t (:inherit highlight)))))
 
-
 ;;;###autoload
 (when load-file-name
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'creamy)
+(provide-theme 'creamy-dark)
+(provide 'creamy-dark-theme)
 
-;;; creamy-theme.el ends here
+;;; creamy-dark-theme.el ends here
