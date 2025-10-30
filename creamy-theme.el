@@ -33,6 +33,8 @@
 
 ;;; Code:
 
+(add-to-list 'custom-theme-load-path (file-name-directory (or load-file-name (buffer-file-name))))
+
 ;;;###autoload
 (when load-file-name
   (add-to-list 'custom-theme-load-path

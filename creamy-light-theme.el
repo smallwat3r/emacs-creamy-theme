@@ -173,4 +173,4 @@
 (provide-theme 'creamy-light)
 (provide 'creamy-theme-light)
 
-;;; creamy-theme-light.el ends here
+;;; creamy-light-theme.el ends here

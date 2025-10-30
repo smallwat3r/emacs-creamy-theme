@@ -170,4 +170,4 @@
 (provide-theme 'creamy-dark)
 (provide 'creamy-theme-dark)
 
-;;; creamy-theme-dark.el ends here
+;;; creamy-dark-theme.el ends here
