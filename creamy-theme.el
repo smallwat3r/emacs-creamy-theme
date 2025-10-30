@@ -28,12 +28,6 @@
 
 (deftheme creamy "A simple creamy theme with light and dark variants.")
 
-(defcustom creamy-theme-variant 'light
-  "The variant of the creamy theme to use."
-  :type '(choice (const :tag "Light" light)
-                 (const :tag "Dark" dark))
-  :group 'creamy)
-
 (require 'creamy-theme-light)
 (require 'creamy-theme-dark)
 
@@ -43,6 +37,15 @@
                    'creamy-dark
                  'creamy-light)))
     (load-theme theme t)))
+
+(defcustom creamy-theme-variant 'light
+  "The variant of the creamy theme to use."
+  :type '(choice (const :tag "Light" light)
+                 (const :tag "Dark" dark))
+  :group 'creamy
+  :set (lambda (symbol value)
+         (set-default symbol value)
+         (creamy-theme-load)))
 
 ;;;###autoload
 (when load-file-name
