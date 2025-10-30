@@ -35,8 +35,6 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl-lib))
-
 (defconst creamy--light-faces
   '(
     (default ((t (:background "#F5E4C1" :foreground "black"))))
