@@ -1,4 +1,4 @@
-;;; creamy-light-theme.el --- A simple creamy light theme  -*- lexical-binding: t -*-
+;;; creamy-theme-light.el --- A simple creamy light theme  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Matthieu Petiteau <mpetiteau.pro@gmail.com>
 
@@ -171,6 +171,6 @@
                (file-name-as-directory (file-name-directory load-file-name))))
 
 (provide-theme 'creamy-light)
-(provide 'creamy-light-theme)
+(provide 'creamy-theme-light)
 
-;;; creamy-light-theme.el ends here
+;;; creamy-theme-light.el ends here
