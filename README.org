@@ -6,22 +6,11 @@ Creamy is a warm, minimal theme for Emacs designed to reduce visual noise and ma
 
 I've used Creamy privately for years, refining it over time to suit my needs for clarity and comfort. Eventually, it felt right to share it with the community, and now it’s available as a standalone theme.
 
-Prefer darker environments? There's also Creamy Dark, offering the same clean aesthetic with a deeper, soothing palette, with a full black background.
-
 ** Previews
 
-Creamy Light
-
 #+NAME: fig:creamy
-#+CAPTION: Creamy Light
-[[./images/creamy-light.png]]
-
-Creamy Dark
-
-#+NAME: fig:creamy-dark
-#+CAPTION: Creamy Dark
-[[./images/creamy-dark.png]]
-
+#+CAPTION: Creamy
+[[./images/creamy.png]]
 
 ** Installation
 
@@ -36,11 +25,6 @@ And add the following to your ~.emacs~ file:
 #+begin_src emacs-list
 (add-to-list 'custom-theme-load-path "/path/to/emacs-creamy-theme")
 (load-theme 'creamy t)
-#+end_src
-
-To use the dark variant, add this before loading the theme:
-#+begin_src emacs-lisp
-(setq creamy-theme-variant 'dark)
 #+end_src
 
 *** Doom Emacs
