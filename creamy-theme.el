@@ -268,5 +268,12 @@
 (deftheme creamy "A simple creamy theme with light and dark variants.")
 (apply #'custom-theme-set-faces 'creamy (creamy--faces))
 
+;;;###autoload
+(when load-file-name
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name)))
+  (when (not window-system)
+    (custom-set-faces '(default ((t (:background nil)))))))
+
 (provide-theme 'creamy)
 ;;; creamy-theme.el ends here
