@@ -48,18 +48,9 @@
   :set (lambda (symbol value)
          (set-default symbol value)
          (let ((variant (if (eq value 'dark) 'creamy-dark 'creamy-light)))
-           (when (custom-theme-enabled-p 'creamy)
-             ;; disable other variants before loading the new one
-             (mapc #'disable-theme '(creamy-light creamy-dark))
-             (load-theme variant t)))))
-
-(deftheme creamy "A simple creamy theme with light and dark variants.")
-
-;; Load the selected variant.
-(load-theme (if (eq creamy-theme-variant 'dark)
-                'creamy-dark
-              'creamy-light)
-            t)
+           ;; disable other variants before loading the new one
+           (mapc #'disable-theme '(creamy-light creamy-dark))
+           (load-theme variant t))))
 
 (provide 'creamy-theme)
 
