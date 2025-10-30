@@ -23,20 +23,20 @@
 ;;; Commentary:
 
 ;; A simple creamy theme with light and dark variants.
+;;
+;; To use, add this to your init.el:
+;;
+;;   (add-to-list 'custom-theme-load-path "/path/to/emacs-creamy-theme/")
+;;   (load-theme 'creamy t)
+;;
+;; To change the variant, customize `creamy-theme-variant`.
 
 ;;; Code:
 
-(deftheme creamy "A simple creamy theme with light and dark variants.")
-
-(require 'creamy-theme-light)
-(require 'creamy-theme-dark)
-
-(defun creamy-theme-load ()
-  "Load the creamy theme variant."
-  (let ((theme (if (eq creamy-theme-variant 'dark)
-                   'creamy-dark
-                 'creamy-light)))
-    (load-theme theme t)))
+;;;###autoload
+(when load-file-name
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name))))
 
 (defcustom creamy-theme-variant 'light
   "The variant of the creamy theme to use."
@@ -45,12 +45,19 @@
   :group 'creamy
   :set (lambda (symbol value)
          (set-default symbol value)
-         (creamy-theme-load)))
+         (let ((variant (if (eq value 'dark) 'creamy-dark 'creamy-light)))
+           (when (custom-theme-enabled-p 'creamy)
+             ;; disable other variants before loading the new one
+             (mapc #'disable-theme '(creamy-light creamy-dark))
+             (load-theme variant t)))))
 
-;;;###autoload
-(when load-file-name
-  (add-to-list 'custom-theme-load-path
-               (file-name-as-directory (file-name-directory load-file-name))))
+(deftheme creamy "A simple creamy theme with light and dark variants.")
+
+;; Load the selected variant.
+(load-theme (if (eq creamy-theme-variant 'dark)
+                'creamy-dark
+              'creamy-light)
+            t)
 
 (provide-theme 'creamy)
 
