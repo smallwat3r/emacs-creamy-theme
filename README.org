@@ -33,11 +33,13 @@ git clone https://github.com/smallwat3r/emacs-creamy-theme.git
 #+end_src
 
 And add the following to your ~.emacs~ file:
-#+begin_src emacs-lisp
+#+begin_src emacs-list
 (add-to-list 'custom-theme-load-path "/path/to/emacs-creamy-theme")
 (load-theme 'creamy t)
+#+end_src
 
-;; To use the dark variant, add this before loading the theme:
+To use the dark variant, add this before loading the theme:
+#+begin_src emacs-lisp
 (setq creamy-theme-variant 'dark)
 #+end_src
 

@@ -1,6 +1,6 @@
 ;;; creamy-theme.el --- A simple creamy theme with light and dark variants  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022 Matthieu Petiteau <mpetiteau.pro@gmail.com>
+;; Copyright (C) 2022-2025 Matthieu Petiteau <mpetiteau.pro@gmail.com>
 
 ;; Homepage: https://github.com/smallwat3r/emacs-creamy-theme
 ;; Version: 0.2.0
@@ -27,7 +27,11 @@
 ;; To use, add this to your init.el:
 ;;
 ;;   (add-to-list 'custom-theme-load-path "/path/to/dir/containing/this/file/")
-;;   (load-theme 'creamy-light t)  ;; or (load-theme 'creamy-dark t)
+;;   (load-theme 'creamy t)
+;; 
+;; To use the dark variant, add this before loading the theme:
+;;
+;;   (setq creamy-theme-variant 'dark)
 
 ;;; Code:
 
