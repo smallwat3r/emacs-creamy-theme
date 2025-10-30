@@ -6,7 +6,7 @@ Creamy is a warm, minimal theme for Emacs designed to reduce visual noise and ma
 
 I've used Creamy privately for years, refining it over time to suit my needs for clarity and comfort. Eventually, it felt right to share it with the community, and now it’s available as a standalone theme.
 
-** Previews
+** Preview
 
 #+NAME: fig:creamy
 #+CAPTION: Creamy
