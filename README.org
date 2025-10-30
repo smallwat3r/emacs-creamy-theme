@@ -34,8 +34,11 @@ git clone https://github.com/smallwat3r/emacs-creamy-theme.git
 
 And add the following to your ~.emacs~ file:
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "/path/to/creamy-theme")
-(load-theme 'creamy-light t)
+(add-to-list 'custom-theme-load-path "/path/to/emacs-creamy-theme")
+(load-theme 'creamy t)
+
+;; To use the dark variant, add this before loading the theme:
+(setq creamy-theme-variant 'dark)
 #+end_src
 
 *** Doom Emacs
@@ -47,5 +50,5 @@ Add the following to your ~packages.el~ file:
 
 Then load the theme in your ~config.el~ file:
 #+begin_src emacs-lisp
-(setq doom-theme 'creamy-light)
+(setq doom-theme 'creamy)
 #+end_src

@@ -26,33 +26,14 @@
 ;;
 ;; To use, add this to your init.el:
 ;;
-;;   (add-to-list 'custom-theme-load-path "/path/to/emacs-creamy-theme/")
-;;   (load-theme 'creamy t)
-;;
-;; To change the variant, customize `creamy-theme-variant`.
+;;   (add-to-list 'custom-theme-load-path "/path/to/dir/containing/this/file/")
+;;   (load-theme 'creamy-light t)  ;; or (load-theme 'creamy-dark t)
 
 ;;; Code:
 
-(deftheme creamy "A simple creamy theme with light and dark variants.")
+(eval-when-compile (require 'cl-lib))
 
-(defgroup creamy-theme nil
-  "Creamy theme."
-  :group 'faces
-  :prefix "creamy-"
-  :tag "Creamy theme")
-
-(defcustom creamy-theme-variant 'light
-  "The variant of the creamy theme to use."
-  :type '(choice (const :tag "Light" light)
-                 (const :tag "Dark" dark))
-  :group 'creamy-theme
-  :set (lambda (symbol value)
-         (set-symbol-value symbol value)
-         (when (member 'creamy custom-enabled-themes)
-           (disable-theme 'creamy)
-           (load-theme 'creamy t))))
-
-(defconst creamy-light-faces
+(defconst creamy--light-faces
   '(
     (default ((t (:background "#F5E4C1" :foreground "black"))))
     (lsp-headerline-breadcrumb-symbols-face ((t (:inherit font-lock-constant-face))))
@@ -74,20 +55,20 @@
     (font-lock-constant-face ((t (:foreground unspecified))))
     (font-lock-builtin-face ((t (:foreground unspecified))))
     (font-lock-type-face ((t (:foreground unspecified))))
-    (font-lock-regexp-grouping-backslash ((t :foreground "chartreuse4" :weight bold)))
+    (font-lock-regexp-grouping-backslash ((t (:foreground "chartreuse4" :weight bold))))
     (link ((t (:foreground "cyan4" :underline t))))
     (region ((t (:background "wheat2" :extend t))))
-    (magit-section-highlight ((t (:background "wheat2"))))
     (highlight ((t (:background "burlywood1"))))
     (lazy-highlight ((t (:background "gold2"))))
     (whitespace-tab ((t (:background "PaleTurquoise1"))))
     (show-paren-match ((t (:background "#c488ff" :foreground "black" :underline t :weight bold))))
     (show-paren-mismatch ((t (:background "red4" :foreground "red" :weight bold))))
     (fringe ((t (:background unspecified))))
-    (line-number ((t :foreground "cornsilk3")))
+    (line-number ((t (:foreground "cornsilk3"))))
     (git-commit-summary ((t (:weight bold))))
-    (magit-section-highlight ((t (:background "#f6fecd"))))
+    (magit-section-highlight ((t (:background "wheat2"))))
     (magit-diff-context-highlight ((t (:background unspecified))))
+    ;; Terminal palette
     (term-color-white ((t (:foreground "grey41" :background "grey41"))))
     (term-color-black ((t (:foreground "grey59" :background "grey59"))))
     (term-color-yellow ((t (:foreground "yellow4" :background "yellow4"))))
@@ -104,15 +85,17 @@
     (term-color-bright-cyan ((t (:inherit term-color-cyan))))
     (term-color-bright-green ((t (:inherit term-color-green))))
     (term-color-bright-magenta ((t (:inherit term-color-magenta))))
+    ;; Dired
     (diredfl-dir-name ((t (:background unspecified :underline t))))
+    ;; Org / Markdown
     (org-block-begin-line ((t (:inherit font-lock-comment-face :background "cornsilk3" :extend t))))
-    (org-block-end-line ((t (:inherit font-lock-comment-face :background "cornsilk3" :extend t))))
-    (org-code ((t (:inherit fixed-pitch :background "cornsilk"))))
+    (org-block-end-line   ((t (:inherit font-lock-comment-face :background "cornsilk3" :extend t))))
+    (org-code  ((t (:inherit fixed-pitch :background "cornsilk"))))
     (org-block ((t (:inherit fixed-pitch :background "cornsilk" :extend t))))
     (org-indent ((t (:inherit (org-hide fixed-pitch)))))
     (org-table ((t (:inherit fixed-pitch :foreground "gray41"))))
     (org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-    (org-property-value ((t (:inherit fixed-pitch))) t))
+    (org-property-value ((t (:inherit fixed-pitch))))
     (org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
     (org-verbatim ((t (:inherit (shadow fixed-pitch)))))
     (org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
@@ -130,34 +113,36 @@
     (markdown-header-face-4 ((t (:inherit outline-4))))
     (markdown-header-face-5 ((t (:inherit outline-5))))
     (markdown-header-face-6 ((t (:inherit outline-6))))
-    (markdown-inline-code-face ((t :inherit org-block)))
+    (markdown-inline-code-face ((t (:inherit org-block))))
     (markdown-pre-face ((t (:inherit org-code :extend t))))
     (markdown-language-keyword-face ((t (:inherit org-block-begin-line))))
+    ;; Whitespace
     (whitespace-space ((t (:inherit whitespace-newline))))
-    (whitespace-tabs ((t (:inherit whitespace-newline))))
-    (git-gutter-fr:added ((t (:background unspecified :foreground "green"))))
-    (git-gutter-fr:deleted ((t (:background unspecified :foreground "red"))))
-    (git-gutter-fr:modified ((t (:background unspecified :foreground "magenta"))))
-    (doom-modeline-buffer-file ((t (:foreground unspecified :weight bold))))
-    (doom-modeline-project-dir ((t (:foreground unspecified :weight bold))))
-    (doom-modeline-info ((t (:foreground unspecified :weight bold))))
-    (doom-modeline-highlight ((t (:foreground "magenta" :weight bold))))
+    (whitespace-tabs  ((t (:inherit whitespace-newline))))
+    ;; Git gutter / modeline / overlays / corfu
+    (git-gutter-fr:added   ((t (:foreground "green"  :background unspecified))))
+    (git-gutter-fr:deleted ((t (:foreground "red"    :background unspecified))))
+    (git-gutter-fr:modified((t (:foreground "magenta":background unspecified))))
+    (doom-modeline-buffer-file   ((t (:foreground unspecified :weight bold))))
+    (doom-modeline-project-dir   ((t (:foreground unspecified :weight bold))))
+    (doom-modeline-info          ((t (:foreground unspecified :weight bold))))
+    (doom-modeline-highlight     ((t (:foreground "magenta" :weight bold))))
     (doom-modeline-evil-insert-state ((t (:foreground "green4" :weight bold))))
-    (doom-modeline-compilation ((t (:inherit warning :slant italic))))
-    (symbol-overlay-face-1 ((t (:foreground "black" :background "orchid2" :weight bold))))
-    (symbol-overlay-face-2 ((t (:foreground "black" :background "DarkOrange1" :weight bold))))
-    (symbol-overlay-face-3 ((t (:foreground "black" :background "chartreuse2" :weight bold))))
-    (symbol-overlay-face-4 ((t (:foreground "black" :background "turquoise2" :weight bold))))
-    (symbol-overlay-face-5 ((t (:foreground "black" :background "tomato" :weight bold))))
-    (symbol-overlay-face-6 ((t (:foreground "black" :background "peach puff" :weight bold))))
+    (doom-modeline-compilation   ((t (:inherit warning :slant italic))))
+    (symbol-overlay-face-1 ((t (:foreground "black" :background "orchid2"        :weight bold))))
+    (symbol-overlay-face-2 ((t (:foreground "black" :background "DarkOrange1"    :weight bold))))
+    (symbol-overlay-face-3 ((t (:foreground "black" :background "chartreuse2"    :weight bold))))
+    (symbol-overlay-face-4 ((t (:foreground "black" :background "turquoise2"     :weight bold))))
+    (symbol-overlay-face-5 ((t (:foreground "black" :background "tomato"         :weight bold))))
+    (symbol-overlay-face-6 ((t (:foreground "black" :background "peach puff"     :weight bold))))
     (symbol-overlay-face-7 ((t (:foreground "black" :background "medium violet red" :weight bold))))
-    (symbol-overlay-face-8 ((t (:foreground "black" :background "dark violet" :weight bold))))
+    (symbol-overlay-face-8 ((t (:foreground "black" :background "dark violet"    :weight bold))))
     (corfu-default ((t (:inherit default))))
     (corfu-current ((t (:inherit highlight))))
     )
-  "A list of faces for the light variant of the creamy theme.")
+  "Faces for the creamy-light theme.")
 
-(defconst creamy-dark-faces
+(defconst creamy--dark-faces
   '(
     (default ((t (:background "black" :foreground "white"))))
     (lsp-headerline-breadcrumb-symbols-face ((t (:inherit font-lock-constant-face))))
@@ -179,7 +164,7 @@
     (font-lock-constant-face ((t (:foreground unspecified))))
     (font-lock-builtin-face ((t (:foreground unspecified))))
     (font-lock-type-face ((t (:foreground unspecified))))
-    (font-lock-regexp-grouping-backslash ((t :foreground "chartreuse4" :weight bold)))
+    (font-lock-regexp-grouping-backslash ((t (:foreground "chartreuse4" :weight bold))))
     (link ((t (:foreground "cyan4" :underline t))))
     (region ((t (:background "grey10" :extend t))))
     (highlight ((t (:background "SteelBlue4"))))
@@ -188,9 +173,10 @@
     (show-paren-match ((t (:background "#c488ff" :foreground "black" :underline t :weight bold))))
     (show-paren-mismatch ((t (:background "red4" :foreground "red" :weight bold))))
     (fringe ((t (:background unspecified))))
-    (line-number ((t :foreground "grey12")))
+    (line-number ((t (:foreground "grey12"))))
     (git-commit-summary ((t (:weight bold))))
     (magit-diff-context-highlight ((t (:background unspecified))))
+    ;; Terminal palette
     (term-color-white ((t (:foreground "grey90" :background "grey90"))))
     (term-color-black ((t (:foreground "grey59" :background "grey59"))))
     (term-color-yellow ((t (:foreground "yellow3" :background "yellow3"))))
@@ -207,15 +193,17 @@
     (term-color-bright-cyan ((t (:inherit term-color-cyan))))
     (term-color-bright-green ((t (:inherit term-color-green))))
     (term-color-bright-magenta ((t (:inherit term-color-magenta))))
+    ;; Dired
     (diredfl-dir-name ((t (:background unspecified :underline t))))
+    ;; Org / Markdown
     (org-block-begin-line ((t (:inherit font-lock-comment-face :background "gray20" :extend t))))
-    (org-block-end-line ((t (:inherit font-lock-comment-face :background "gray20" :extend t))))
-    (org-code ((t (:inherit fixed-pitch :background "gray10"))))
+    (org-block-end-line   ((t (:inherit font-lock-comment-face :background "gray20" :extend t))))
+    (org-code  ((t (:inherit fixed-pitch :background "gray10"))))
     (org-block ((t (:inherit fixed-pitch :background "gray10" :extend t))))
     (org-indent ((t (:inherit (org-hide fixed-pitch)))))
     (org-table ((t (:inherit fixed-pitch :foreground "gray41"))))
     (org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-    (org-property-value ((t (:inherit fixed-pitch))) t))
+    (org-property-value ((t (:inherit fixed-pitch))))
     (org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
     (org-verbatim ((t (:inherit (shadow fixed-pitch)))))
     (org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
@@ -233,44 +221,48 @@
     (markdown-header-face-4 ((t (:inherit outline-4))))
     (markdown-header-face-5 ((t (:inherit outline-5))))
     (markdown-header-face-6 ((t (:inherit outline-6))))
-    (markdown-inline-code-face ((t :inherit org-block)))
+    (markdown-inline-code-face ((t (:inherit org-block))))
     (markdown-pre-face ((t (:inherit org-code :extend t))))
     (markdown-language-keyword-face ((t (:inherit org-block-begin-line))))
+    ;; Whitespace
     (whitespace-space ((t (:inherit whitespace-newline))))
-    (whitespace-tabs ((t (:inherit whitespace-newline))))
-    (git-gutter-fr:added ((t (:background unspecified :foreground "green"))))
-    (git-gutter-fr:deleted ((t (:background unspecified :foreground "red"))))
-    (git-gutter-fr:modified ((t (:background unspecified :foreground "magenta"))))
-    (doom-modeline-buffer-file ((t (:foreground unspecified :weight bold))))
-    (doom-modeline-project-dir ((t (:foreground unspecified :weight bold))))
-    (doom-modeline-info ((t (:foreground unspecified :weight bold))))
-    (doom-modeline-highlight ((t (:foreground "magenta" :weight bold))))
+    (whitespace-tabs  ((t (:inherit whitespace-newline))))
+    ;; Git gutter / modeline / overlays / corfu
+    (git-gutter-fr:added   ((t (:foreground "green"  :background unspecified))))
+    (git-gutter-fr:deleted ((t (:foreground "red"    :background unspecified))))
+    (git-gutter-fr:modified((t (:foreground "magenta":background unspecified))))
+    (doom-modeline-buffer-file   ((t (:foreground unspecified :weight bold))))
+    (doom-modeline-project-dir   ((t (:foreground unspecified :weight bold))))
+    (doom-modeline-info          ((t (:foreground unspecified :weight bold))))
+    (doom-modeline-highlight     ((t (:foreground "magenta" :weight bold))))
     (doom-modeline-evil-insert-state ((t (:foreground "green4" :weight bold))))
-    (doom-modeline-compilation ((t (:inherit warning :slant italic))))
-    (symbol-overlay-face-1 ((t (:foreground "black" :background "orchid2" :weight bold))))
-    (symbol-overlay-face-2 ((t (:foreground "black" :background "DarkOrange1" :weight bold))))
-    (symbol-overlay-face-3 ((t (:foreground "black" :background "chartreuse2" :weight bold))))
-    (symbol-overlay-face-4 ((t (:foreground "black" :background "turquoise2" :weight bold))))
-    (symbol-overlay-face-5 ((t (:foreground "black" :background "tomato" :weight bold))))
-    (symbol-overlay-face-6 ((t (:foreground "black" :background "peach puff" :weight bold))))
+    (doom-modeline-compilation   ((t (:inherit warning :slant italic))))
+    (symbol-overlay-face-1 ((t (:foreground "black" :background "orchid2"        :weight bold))))
+    (symbol-overlay-face-2 ((t (:foreground "black" :background "DarkOrange1"    :weight bold))))
+    (symbol-overlay-face-3 ((t (:foreground "black" :background "chartreuse2"    :weight bold))))
+    (symbol-overlay-face-4 ((t (:foreground "black" :background "turquoise2"     :weight bold))))
+    (symbol-overlay-face-5 ((t (:foreground "black" :background "tomato"         :weight bold))))
+    (symbol-overlay-face-6 ((t (:foreground "black" :background "peach puff"     :weight bold))))
     (symbol-overlay-face-7 ((t (:foreground "black" :background "medium violet red" :weight bold))))
-    (symbol-overlay-face-8 ((t (:foreground "black" :background "dark violet" :weight bold))))
+    (symbol-overlay-face-8 ((t (:foreground "black" :background "dark violet"    :weight bold))))
     (corfu-default ((t (:inherit default))))
     (corfu-current ((t (:inherit highlight))))
     )
-  "A list of faces for the dark variant of the creamy theme.")
+  "Faces for the creamy-dark theme.")
 
-(let ((faces (if (eq creamy-theme-variant 'dark)
-                 creamy-dark-faces
-               creamy-light-faces)))
-  (eval `(custom-theme-set-faces 'creamy ,@faces)))
+(defcustom creamy-theme-variant 'light
+  "The variant of the theme to use."
+  :type '(choice (const 'light) (const 'dark))
+  :group 'creamy-theme)
 
-;;;###autoload
-(when load-file-name
-  (add-to-list 'custom-theme-load-path
-               (file-name-as-directory (file-name-directory load-file-name))))
+(defun creamy--faces ()
+  "Return the faces for the current variant."
+  (if (eq creamy-theme-variant 'light)
+      creamy--light-faces
+    creamy--dark-faces))
+
+(deftheme creamy "A simple creamy theme with light and dark variants.")
+(apply #'custom-theme-set-faces 'creamy (creamy--faces))
 
 (provide-theme 'creamy)
-(provide 'creamy-theme)
-
 ;;; creamy-theme.el ends here
