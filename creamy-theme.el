@@ -61,8 +61,6 @@
               'creamy-light)
             t)
 
-(provide-theme 'creamy)
-
 (provide 'creamy-theme)
 
 ;;; creamy-theme.el ends here
