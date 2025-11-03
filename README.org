@@ -1,5 +1,7 @@
 #+TITLE: creamy-theme for Emacs
 
+[[https://melpa.org/#/creamy-theme][file:https://melpa.org/packages/creamy-theme-badge.svg]]
+
 ** About
 
 Creamy is a warm, minimal theme for Emacs designed to reduce visual noise and make long coding sessions easier on the eyes. It softens the harsh edges of typical syntax highlighting by stripping away excess color, leaving only the essential elements subtly emphasized. The result is a calm, focused editing experience, gentle on the eyes, yet readable and expressive where it counts.
